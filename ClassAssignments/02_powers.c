@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <conio.h>
-void main(){
+int main(){
     int n,x,y;
     printf("enter value of n");
     scanf("%d", &n);
-    x=1<<n;
-    y=1>>n;
+    x=n<<1;
+    y=n>>1;
     printf("The value of 2^%d is %d \n", n,x );
-    printf("The value of 0.5 ^%d is %d", n,y);
-    getch();
+    printf("The value of 1/2 ^%d is %d", n,y);
+    return 0;
 }
