@@ -10,14 +10,15 @@ int main() {
     int balls = 0;
     int target;
     
-    // Declare team names
+    // Team ke naam
     char team1[20], team2[20];
     
-    // Get match details from user
+    // Kitne over ka match set krna hai 
     printf("Enter total overs to be played: ");
     scanf("%d", &total_overs);
     
-    total_balls = total_overs * 6; // Total balls = overs * 6
+    // Total balls 
+    total_balls = total_overs * 6; 
     
     printf("\nEnter the batting team's name: ");
     scanf("%s", team1);
@@ -25,11 +26,11 @@ int main() {
     printf("Enter the bowling team's name: ");
     scanf("%s", team2);
     
-    // First innings: Batting team sets the target
+    // Pheli Bating
     printf("\n--- First Innings ---\n");
     printf("%s is batting, %s is bowling.\n", team1, team2);
     
-    // Ask user to enter runs for each ball
+    // Runs per ball
     for (balls = 1; balls <= total_balls && team1_wickets > 0; balls++) {
         printf("Enter runs for ball %d (or enter 'o' for out, 'w' for wide, 'n' for no-ball): ", balls);
         char input[10];
@@ -41,30 +42,30 @@ int main() {
         } else if (input[0] == 'w') {
             printf("Wide ball! 1 extra run added.\n");
             team1_runs++;
-            balls--; // Don't count wide ball as a legitimate delivery
+            balls--; // ball count nhi hogi 
         } else if (input[0] == 'n') {
             printf("No ball! 1 extra run added.\n");
             team1_runs++;
-            balls--; // Don't count no ball as a legitimate delivery
+            balls--; // ball count nhi hogi 
         } else {
-            int runs_on_ball = atoi(input);
+            int runs_on_ball = atoi(input);  //ASCII to Integer
             if (runs_on_ball < 0) {
                 printf("Invalid input. Runs cannot be negative. Please try again.\n");
-                balls--;  // Re-enter the current ball
+                balls--;  // ball count nhi hogi 
                 continue;
             }
             team1_runs += runs_on_ball;
         }
     }
     
-    target = team1_runs + 1;  // Set the target for team2 to chase
+    target = team1_runs + 1;  // target set
     printf("\n%s set the target to %d runs.\n", team1, target);
 
-    // Second innings: Team2 chases the target
+    // doosri batting
     printf("\n--- Second Innings ---\n");
     printf("%s is batting, %s is bowling.\n", team2, team1);
     
-    // Ask user to enter runs for each ball
+   //Runs per ball for second innings
     for (balls = 1; balls <= total_balls && team2_wickets > 0; balls++) {
         printf("Enter runs for ball %d (or enter 'o' for out, 'w' for wide, 'n' for no-ball): ", balls);
         char input[10];
@@ -76,29 +77,29 @@ int main() {
         } else if (input[0] == 'w') {
             printf("Wide ball! 1 extra run added.\n");
             team2_runs++;
-            balls--; // Don't count wide ball as a legitimate delivery
+            balls--; // ball count nhi hogi 
         } else if (input[0] == 'n') {
             printf("No ball! 1 extra run added.\n");
             team2_runs++;
-            balls--; // Don't count no ball as a legitimate delivery
+            balls--; // ball count nhi hogi 
         } else {
-            int runs_on_ball = atoi(input);
+            int runs_on_ball = atoi(input); //ASCII to Integer
             if (runs_on_ball < 0) {
                 printf("Invalid input. Runs cannot be negative. Please try again.\n");
-                balls--;  // Re-enter the current ball
+                balls--;  // ball count nhi hogi 
                 continue;
             }
             team2_runs += runs_on_ball;
         }
         
-        // If the target is achieved, end the game early
+        // target is achieved
         if (team2_runs >= target) {
             printf("\n%s has achieved the target of %d runs.\n", team2, target);
             break;
         }
     }
 
-    // Display the result of the match
+    // result function call
     display_result(team1_runs, team2_runs, target, total_balls, team1, team2, team1_wickets, team2_wickets);
 
     return 0;
