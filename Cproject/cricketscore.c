@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 void display_result(int team1_runs, int team2_runs, int target, int total_balls, char team1[], char team2[], int team1_wickets, int team2_wickets);
+int is_valid_run_input(char input[]);
 
 int main() {
     int overs, total_overs;
@@ -47,14 +49,17 @@ int main() {
             printf("No ball! 1 extra run added.\n");
             team1_runs++;
             balls--; // ball count nhi hogi 
-        } else {
-            int runs_on_ball = atoi(input);  //ASCII to Integer
+        } else if (is_valid_run_input(input)) {
+            int runs_on_ball = atoi(input);  // ASCII to Integer
             if (runs_on_ball < 0) {
                 printf("Invalid input. Runs cannot be negative. Please try again.\n");
                 balls--;  // ball count nhi hogi 
                 continue;
             }
             team1_runs += runs_on_ball;
+        } else {
+            printf("Invalid input. Please enter a valid number or one of 'o', 'w', 'n'.\n");
+            balls--;  // ball count nhi hogi 
         }
     }
     
@@ -65,7 +70,7 @@ int main() {
     printf("\n--- Second Innings ---\n");
     printf("%s is batting, %s is bowling.\n", team2, team1);
     
-   //Runs per ball for second innings
+   // Runs per ball for second innings
     for (balls = 1; balls <= total_balls && team2_wickets > 0; balls++) {
         printf("Enter runs for ball %d (or enter 'o' for out, 'w' for wide, 'n' for no-ball): ", balls);
         char input[10];
@@ -82,14 +87,17 @@ int main() {
             printf("No ball! 1 extra run added.\n");
             team2_runs++;
             balls--; // ball count nhi hogi 
-        } else {
-            int runs_on_ball = atoi(input); //ASCII to Integer
+        } else if (is_valid_run_input(input)) {
+            int runs_on_ball = atoi(input); // ASCII to Integer
             if (runs_on_ball < 0) {
                 printf("Invalid input. Runs cannot be negative. Please try again.\n");
                 balls--;  // ball count nhi hogi 
                 continue;
             }
             team2_runs += runs_on_ball;
+        } else {
+            printf("Invalid input. Please enter a valid number or one of 'o', 'w', 'n'.\n");
+            balls--;  // ball count nhi hogi 
         }
         
         // target is achieved
@@ -103,6 +111,16 @@ int main() {
     display_result(team1_runs, team2_runs, target, total_balls, team1, team2, team1_wickets, team2_wickets);
 
     return 0;
+}
+
+// Function to check if the input is a valid run number
+int is_valid_run_input(char input[]) {
+    for (int i = 0; input[i] != '\0'; i++) {
+        if (!isdigit(input[i])) { // Check if the character is not a digit
+            return 0;  // Invalid input
+        }
+    }
+    return 1;  // Valid input
 }
 
 void display_result(int team1_runs, int team2_runs, int target, int total_balls, char team1[], char team2[], int team1_wickets, int team2_wickets) {
