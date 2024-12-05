@@ -1,6 +1,6 @@
 #include <stdio.h>
 void main() {
-    int array1[10], x, i, j, size = 10, found = 0;
+    int array1[10], x, i, j, size = 10;
 
     // Input array elements
     printf("Enter array elements: ");
@@ -15,7 +15,6 @@ void main() {
     // Search for the element
     for (i = 0; i < size; i++) {
         if (x == array1[i]) {
-            found = 1;
             printf("%d is found at location %d\n", x, i);
 
             // Shift elements to the left to delete the element
@@ -27,7 +26,7 @@ void main() {
         }
     }
 
-    if (!found) {
+    if (size==10) {
         printf("%d not found\n", x);
     } else {
         // Print the updated array

@@ -1,3 +1,4 @@
+//Made a cricket scorecard as a project of PPS
 #include <stdio.h>
 #include <stdlib.h>
 

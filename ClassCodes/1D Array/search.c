@@ -13,13 +13,12 @@ void main() {
 
     for (i = 0; i < 10; i++) {
         if (x == array1[i]) {
-            printf("%d is found at location %d\n", x, i + 1); 
-            found = 1;
-            break; 
+            printf("%d is found at location %d\n", x, i + 1);
+            break;
         }
     }
 
-    if (!found) {
+    if(i==10) {
         printf("%d is not found in the array\n", x);
     }
 }
